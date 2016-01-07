@@ -1,10 +1,18 @@
 package info.smartkit.verbose_dollop.domain;
 
-import lombok.Data;
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//import lombok.ToString;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+//import javax.persistence.Entity;
 
 /**
  * Created by yangboz on 1/6/16.
@@ -12,15 +20,20 @@ import javax.persistence.Id;
  * @example: {"latitude": "52.986375", "user_id": 12, "name": "Christina McArdle", "longitude": "-6.043701"}
  * @more https://gist.github.com/brianw/19896c50afa89ad4dec3
  */
-@Data
+
 @Entity
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@ToString
 public class Customer {
+    private String latitude;
+    private int user_id;
+    private String name;
+    private String longitude;
     @Id
-    @GeneratedValue
-    protected Long id;
-    protected String latitude;
-    protected int user_id;
-    protected String name;
-    protected String longitude;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
+    private Long id;
 
 }
