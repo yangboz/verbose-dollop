@@ -1,15 +1,18 @@
 package info.smartkit.verbose_dollop.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import info.smartkit.verbose_dollop.domain.Customer;
+import info.smartkit.verbose_dollop.dto.CustomerDto;
 import info.smartkit.verbose_dollop.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,17 +33,30 @@ public class CustomerServiceImpl implements CustomerService {
 //        ClassLoader classLoader = getClass().getClassLoader();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         File file = new File(classLoader.getResource(fileName).getFile());
-        System.out.println("file:" + file.toString());
+        System.out.println("CustomerDto file:" + file.toString());
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Customer> customerList = objectMapper.readValue(file, List.class);
+        List<CustomerDto> customerDtoList = objectMapper.readValue(file, new TypeReference<List<CustomerDto>>() {
+        });
         //
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         objectMapper.configure(
                 DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        System.out.println("customerDtoList:" + customerDtoList);
+        List<Customer> customerList = new ArrayList<Customer>();
         //
+        for (CustomerDto customerDto : customerDtoList) {
+            Customer customer = new Customer();
+            customer.setName(customerDto.getName());
+            customer.setLatitude(customerDto.getLatitude());
+            customer.setLongitude(customerDto.getLongitude());
+            customer.setUser_id(customerDto.getUser_id());
+            //
+            customerList.add(customer);
+        }
         System.out.println("customerList:" + customerList);
+        //
         //JPA saving...
-        System.out.println("customerRepository:" + customerRepository.toString());
+//        System.out.println("customerRepository:" + customerRepository.toString());
         return customerRepository.save(customerList);
     }
 

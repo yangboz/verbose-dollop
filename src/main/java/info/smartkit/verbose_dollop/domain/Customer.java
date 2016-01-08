@@ -1,18 +1,15 @@
 package info.smartkit.verbose_dollop.domain;
 
-//import lombok.AllArgsConstructor;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
-//import lombok.ToString;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-//import javax.persistence.Entity;
 
 /**
  * Created by yangboz on 1/6/16.
@@ -22,18 +19,17 @@ import javax.persistence.Id;
  */
 
 @Entity
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@ToString
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
-    private String latitude;
-    private int user_id;
-    private String name;
-    private String longitude;
+
+    protected String latitude;
+    protected int user_id;
+    protected String name;
+    protected String longitude;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
-    private Long id;
-
+    protected Long id;
 }

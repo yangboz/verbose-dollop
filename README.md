@@ -10,3 +10,13 @@ Spring-boot JPA with postgre walk through.
 You can use the first formula from this Wikipedia article to calculate distance: https://en.wikipedia.org/wiki/Great-circle_distance -- don't forget, you'll need to convert degrees to radians. Your program should be fully tested too.
  
 Customer list is available here: https://gist.github.com/brianw/19896c50afa89ad4dec3 
+
+# Solutions
+
+2. heavy borrow from: https://gist.github.com/l-ray/11472207
+
+3.1. Database layer, using PostgreSql with native GEO awareness feature;
+3.2. JPA with JTS for POINT/POLYGON db functions storage;
+3.3. JsonMapper for json file read and parse;
+3.4. Spring-boot-data-jpa to apply repository save();
+3.5. Spring-boot-test for jUnit-test;
