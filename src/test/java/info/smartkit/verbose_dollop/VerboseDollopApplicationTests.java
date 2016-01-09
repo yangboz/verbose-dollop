@@ -28,4 +28,9 @@ public class VerboseDollopApplicationTests {
     public void customerServicePopulateOK() throws IOException, ParseException {
         Assert.assertNotNull(customerService.populate());
     }
+
+    @Test
+    public void customerServiceNearbyOK() throws IOException, ParseException {
+        Assert.assertNotNull(customerService.getNearby(100));
+    }
 }

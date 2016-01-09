@@ -20,3 +20,29 @@ Customer list is available here: https://gist.github.com/brianw/19896c50afa89ad4
 3.3. JsonMapper for json file read and parse;
 3.4. Spring-boot-data-jpa to apply repository save();
 3.5. Spring-boot-test for jUnit-test;
+
+# Installation
+
+1.Install PostgreSql and Postgis;
+
+``` brew install postgis
+
+2.Start PostgreSql server:
+
+`` postgres -D /usr/local/var/postgres
+
+3.Create PostgreSql database:
+
+```createdb customers
+
+4.Install postgis extension for Geometry data type:
+
+```CREATE EXTENSION postgis;
+
+# References
+
+Spring-boot-data-jpa: https://spring.io/guides/gs/accessing-data-jpa/
+
+JTS: http://www.hibernatespatial.org/
+
+Postgis: http://postgis.net/install/

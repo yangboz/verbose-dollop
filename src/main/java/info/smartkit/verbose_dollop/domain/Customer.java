@@ -1,8 +1,13 @@
 package info.smartkit.verbose_dollop.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +31,7 @@ public class Customer {
 
     @Setter
     @Getter
-    protected String latitude;
+    protected double latitude;
     @Setter
     @Getter
     protected int user_id;
@@ -35,7 +40,7 @@ public class Customer {
     protected String name;
     @Setter
     @Getter
-    protected String longitude;
+    protected double longitude;
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO)
 //    @GeneratedValue(generator = "increment")
@@ -44,13 +49,14 @@ public class Customer {
     protected Long id;
 
     //
-//    @Setter
-//    @Getter
-//    @JsonIgnore
+    @Setter
+    @Getter
+    @JsonIgnore
+//    @Transient
 //    @Column(columnDefinition = "Geometry", nullable = true)
-//    @Type(type = "org.hibernate.spatial.GeometryType")
+    @Type(type = "org.hibernate.spatial.GeometryType")
 //    protected Geometry geometry;
-//    protected Point geometry;
+    protected Point geometry;
 
     @Getter
     protected String geoString;
@@ -58,8 +64,8 @@ public class Customer {
     public void setGeoString(String geoString) throws ParseException {
         this.geoString = geoString;
         //@see: https://thespatialperspective.wordpress.com/2015/06/20/spring-boot-jpa-and-hibernate-spatial/#comment-18
-//        WKTReader wktReader = new WKTReader();
-//        Geometry geometry = wktReader.read(geoString);//'POINT(-105 40)','POLYGON((-107 39, -102 39, -102 41, -107 41, -107 39))'
-//        this.setGeometry(geometry);
+        WKTReader wktReader = new WKTReader();
+        Geometry geometry = wktReader.read(geoString);//'POINT(-105 40)','POLYGON((-107 39, -102 39, -102 41, -107 41, -107 39))'
+        this.setGeometry((Point) geometry);
     }
 }

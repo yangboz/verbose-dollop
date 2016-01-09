@@ -48,8 +48,8 @@ public class CustomerServiceImpl implements CustomerService {
         for (CustomerDto customerDto : customerDtoList) {
             Customer customer = new Customer();
             customer.setName(customerDto.getName());
-            customer.setLatitude(customerDto.getLatitude());
-            customer.setLongitude(customerDto.getLongitude());
+            customer.setLatitude(Double.parseDouble(customerDto.getLatitude()));
+            customer.setLongitude(Double.parseDouble(customerDto.getLongitude()));
             customer.setUser_id(customerDto.getUser_id());
             customer.setGeoString("POINT(" + customerDto.getLatitude() + " " + customerDto.getLongitude() + ")");
             //
@@ -63,7 +63,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> getNearby(long distance) {
-        return null;
+    public Iterable<Customer> getNearby(double longitude, double latitude, long distance) {
+        Iterable<Customer> customerList = customerRepository.findAll();
+        System.out.println("findAll(),customerList:" + customerList);
+        for (Customer customer : customerList) {
+
+        }
+        return customerList;
     }
 }
