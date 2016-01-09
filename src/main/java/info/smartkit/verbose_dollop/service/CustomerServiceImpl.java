@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.vividsolutions.jts.io.ParseException;
 import info.smartkit.verbose_dollop.domain.Customer;
 import info.smartkit.verbose_dollop.dto.CustomerDto;
 import info.smartkit.verbose_dollop.repository.CustomerRepository;
@@ -27,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepository customerRepository;
 
     @Override
-    public Iterable<Customer> populate() throws IOException {
+    public Iterable<Customer> populate() throws IOException, ParseException {
 
         //Get file from resources folder
 //        ClassLoader classLoader = getClass().getClassLoader();
@@ -50,6 +51,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setLatitude(customerDto.getLatitude());
             customer.setLongitude(customerDto.getLongitude());
             customer.setUser_id(customerDto.getUser_id());
+            customer.setGeoString("POINT(" + customerDto.getLatitude() + " " + customerDto.getLongitude() + ")");
             //
             customerList.add(customer);
         }

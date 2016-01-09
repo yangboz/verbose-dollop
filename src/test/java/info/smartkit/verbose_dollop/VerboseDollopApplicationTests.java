@@ -1,5 +1,6 @@
 package info.smartkit.verbose_dollop;
 
+import com.vividsolutions.jts.io.ParseException;
 import info.smartkit.verbose_dollop.service.CustomerService;
 import junit.framework.Assert;
 import org.junit.Ignore;
@@ -24,7 +25,7 @@ public class VerboseDollopApplicationTests {
     }
 
     @Test
-    public void customerServicePopulateOK() throws IOException {
+    public void customerServicePopulateOK() throws IOException, ParseException {
         Assert.assertNotNull(customerService.populate());
     }
 }
