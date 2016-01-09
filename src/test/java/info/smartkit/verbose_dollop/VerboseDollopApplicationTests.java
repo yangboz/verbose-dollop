@@ -31,6 +31,9 @@ public class VerboseDollopApplicationTests {
 
     @Test
     public void customerServiceNearbyOK() throws IOException, ParseException {
-        Assert.assertNotNull(customerService.getNearby(100));
+        Assert.assertEquals(0, customerService.getNearby(53.3381985, -6.2592576, 0.1).size());
+        Assert.assertNotNull(customerService.getNearby(53.3381985, -6.2592576, 100).size());
+        Assert.assertEquals(7, customerService.getNearby(53.3381985, -6.2592576, 1).size());
+        Assert.assertNotNull(customerService.getNearby(53.3381985, -6.2592576, 10).size());
     }
 }
