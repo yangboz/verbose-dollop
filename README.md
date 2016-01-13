@@ -37,7 +37,6 @@ brew install postgis
 
 postgres -D /usr/local/var/postgres
 
-
 3.Create PostgreSql database:
 
 createdb customers
