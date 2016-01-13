@@ -15,7 +15,7 @@ Customer list is available here: https://gist.github.com/brianw/19896c50afa89ad4
 
 1.see: https://github.com/yangboz/godpaper
 
-2. heavy borrow from: https://gist.github.com/l-ray/11472207
+2.heavy borrow from: https://gist.github.com/l-ray/11472207
 
 3.1. Database layer, using PostgreSql with native GEO awareness feature;
 
